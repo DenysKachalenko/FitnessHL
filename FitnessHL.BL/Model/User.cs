@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessHL.BL.Model
 {
     /// <summary>
     /// User.
     /// </summary>
+    [Serializable]
     public class User
     {
         #region Properties
@@ -55,7 +52,7 @@ namespace FitnessHL.BL.Model
                 throw new ArgumentNullException("Gender cannot be null!", nameof(gender));
             }
 
-            if (birthDate < DateTime.Parse("01.01.1930") || birthDate <= DateTime.Now)
+            if (birthDate < DateTime.Parse("01.01.1930") || birthDate >= DateTime.Now)
             {
                 throw new ArgumentException("Birth date is impossible!", nameof(birthDate));
             }
