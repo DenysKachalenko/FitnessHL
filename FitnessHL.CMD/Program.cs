@@ -9,23 +9,59 @@ namespace FitnessHL.CMD
         {
             Console.WriteLine("You are welcomed by the applications - FitnessHL");
 
-            Console.WriteLine("Enter your username: ");
+            Console.WriteLine("Enter your user name: ");
             string name = Console.ReadLine();
 
-            Console.WriteLine("Enter your gender: ");
-            var gender = Console.ReadLine();
+            var userController = new UserController(name);
 
-            Console.WriteLine("Enter your birth date: ");
-            DateTime birthDate = DateTime.Parse(Console.ReadLine()); //TODO:
+            if (userController.IsNewUser)
+            {
+                Console.Write("Enter your gender: ");
+                var gender = Console.ReadLine();
+                var birthDate = ParseDateTime();
+                var weight = ParseDouble("weight");
+                var height = ParseDouble("growth");
 
-            Console.WriteLine("Enter your weight: ");
-            double weight = double.Parse(Console.ReadLine());
+                userController.SetNewUserData(gender, birthDate, weight, height);
+            }
 
-            Console.WriteLine("Enter your growth: ");
-            double height = double.Parse(Console.ReadLine());
+            Console.WriteLine(userController.CurrentUser);
+            Console.ReadLine();
+        }
 
-            var userController = new UserController(name, gender, birthDate, weight, height);
-            userController.Save();
+        private static DateTime ParseDateTime()
+        {
+            DateTime birthDate;
+            while (true)
+            {
+                Console.Write("Enter your birth date (dd.MM.yyyy): ");
+                if (DateTime.TryParse(Console.ReadLine(), out birthDate))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Wrong birth date format!");
+                }
+            }
+
+            return birthDate;
+        }
+
+        public static double ParseDouble(string name)
+        {
+            while (true)
+            {
+                Console.Write($"Enter {name}: ");
+                if (double.TryParse(Console.ReadLine(), out double value))
+                {
+                    return value;
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong {name} format!");
+                }             
+            }
         }
     }
 }
