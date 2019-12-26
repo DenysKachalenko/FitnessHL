@@ -1,4 +1,5 @@
 ﻿using FitnessHL.BL.Controller;
+using FitnessHL.BL.Model;
 using System;
 
 namespace FitnessHL.CMD
@@ -13,6 +14,7 @@ namespace FitnessHL.CMD
             string name = Console.ReadLine();
 
             var userController = new UserController(name);
+            var eatingController = new EatingController(userController.CurrentUser);
 
             if (userController.IsNewUser)
             {
@@ -26,7 +28,36 @@ namespace FitnessHL.CMD
             }
 
             Console.WriteLine(userController.CurrentUser);
+
+            Console.WriteLine("What you want to do?");
+            Console.WriteLine("E - enter a meal food");
+            var key = Console.ReadKey();
+            if (key.Key == ConsoleKey.E)
+            {
+                var foods = EnterEating();
+                eatingController.Add(foods.Food, foods.Weight);
+
+                foreach (var item in eatingController.Eating.Foods)
+                {
+                    Console.WriteLine($"\r{item.Key} - {item.Value}");
+                }
+            }
+
             Console.ReadLine();
+        }
+
+        private static (Food Food, double Weight) EnterEating()
+        {
+            Console.WriteLine("\nEnter name product: ");
+            var food = Console.ReadLine();
+            var weight = ParseDouble("the portion weight");
+            var calories = ParseDouble("calories");
+            var proteins = ParseDouble("proteins");
+            var fats = ParseDouble("fats");
+            var carbohydrates = ParseDouble("carbohydrates");
+            var product = new Food(food, calories, proteins, fats, carbohydrates);
+
+            return (Food: product, Weight: weight);
         }
 
         private static DateTime ParseDateTime()
