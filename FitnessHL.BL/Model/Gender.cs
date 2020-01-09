@@ -8,11 +8,13 @@ namespace FitnessHL.BL.Model
     [Serializable]
     public class Gender
     {
+        public int Id { get; set; }
         /// <summary>
         /// Name.
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set;  }
 
+        public Gender() { }
         /// <summary>
         /// Create new gender.
         /// </summary>

@@ -8,11 +8,12 @@ namespace FitnessHL.BL.Model
     [Serializable]
     public class User
     {
+        public int Id { get; set; }
         #region Properties
         /// <summary>
         /// Name user.
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary>
         /// Gender user.
         /// </summary>
@@ -35,6 +36,7 @@ namespace FitnessHL.BL.Model
         public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
         #endregion
 
+        public User() { }
         /// <summary>
         /// Create new user.
         /// </summary>

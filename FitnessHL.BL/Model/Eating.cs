@@ -10,19 +10,22 @@ namespace FitnessHL.BL.Model
     /// </summary>
     public class Eating
     {
+        public int Id { get; set; }
         /// <summary>
         /// Meal time.
         /// </summary>
-        public DateTime Moment { get; }
+        public DateTime Moment { get; set; }
         /// <summary>
         /// List taken food.
         /// </summary>
-        public Dictionary<Food, double> Foods { get; }
+        public Dictionary<Food, double> Foods { get; set; }
+        public int UserId { get; set; }
         /// <summary>
         /// User who ate.
         /// </summary>
-        public User User { get; }
+        public virtual User User { get; set; }
 
+        public Eating() { }
         public Eating(User user)
         {
             User = user ?? throw new ArgumentNullException("Null or empty!", nameof(user));

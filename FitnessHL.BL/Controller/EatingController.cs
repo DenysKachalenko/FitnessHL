@@ -7,8 +7,6 @@ namespace FitnessHL.BL.Controller
 {
     public class EatingController : ControllerBass
     {
-        private const string FOODS_FILE_NAME = "foods.dat";
-        private const string EATINGS_FILE_NAME = "eatings.dat";
         /// <summary>
         /// User.
         /// </summary>
@@ -32,33 +30,31 @@ namespace FitnessHL.BL.Controller
         public void Add(Food food, double weight)
         {
             var product = Foods.SingleOrDefault(f => f.Name == food.Name);
-            if(product == null)
+            if (product == null)
             {
                 Foods.Add(food);
                 Eating.Add(food, weight);
-                Save();
             }
             else
             {
                 Eating.Add(product, weight);
-                Save();
-            }                   
+            }
+            Save();
         }
 
         private Eating GetEating()
         {
-            return Load<Eating>(EATINGS_FILE_NAME) ?? new Eating(user);
+            return Load<Eating>().FirstOrDefault() ?? new Eating(user);
         }
-
         private List<Food> GetAllFoods()
         {
-            return Load<List<Food>>(FOODS_FILE_NAME) ?? new List<Food>();
+            return Load<Food>() ?? new List<Food>();
         }
 
         private void Save()
         {
-            Save(FOODS_FILE_NAME, Foods);
-            Save(EATINGS_FILE_NAME, Eating);
+            Save<Food>(Foods);
+            Save(new List<Eating>() { Eating });
         }
     }
 }

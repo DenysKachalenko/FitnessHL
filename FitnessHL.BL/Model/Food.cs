@@ -5,23 +5,26 @@ namespace FitnessHL.BL.Model
     [Serializable]
     public class Food
     {
-        public string Name { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// Proteins.
         /// </summary>
-        public double Proteins { get; }
+        public double Proteins { get; set; }
         /// <summary>
         /// Fats.
         /// </summary>
-        public double Fats { get; }
+        public double Fats { get; set; }
         /// <summary>
         /// Carbohydrates.
         /// </summary>
-        public double Carbohydrates { get; }
+        public double Carbohydrates { get; set; }
         /// <summary>
         /// Calories for 100 gram product.
         /// </summary>
-        public double Calories { get; }
+        public double Calories { get; set; }
+
+        public Food() { }
 
         public Food(string name) : this (name, 0, 0, 0, 0){}
 
