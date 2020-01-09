@@ -8,7 +8,7 @@ namespace FitnessHL.CMD
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //var culture = CultureInfo.CreateSpecificCulture("ua-UA");
             //var resourceManager = new ResourceManager("FitnessHL.CMD.Languages.Messages", typeof(Program).Assembly);
